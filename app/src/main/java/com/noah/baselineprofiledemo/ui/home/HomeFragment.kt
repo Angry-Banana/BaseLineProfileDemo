@@ -17,9 +17,6 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    val homeViewModel by lazy { ViewModelProvider(this).get(HomeViewModel::class.java) }
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
