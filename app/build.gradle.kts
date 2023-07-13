@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
     implementation(libs.glide)
+    implementation("com.github.Justson.AgentWeb:agentweb-core:v5.0.6-androidx")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

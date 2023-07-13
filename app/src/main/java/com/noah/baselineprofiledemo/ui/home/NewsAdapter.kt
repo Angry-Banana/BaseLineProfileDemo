@@ -19,7 +19,7 @@ class NewsAdapter(private val list: List<NewsItemData>) :
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return 20
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
@@ -35,10 +35,10 @@ class NewsAdapter(private val list: List<NewsItemData>) :
         private val imageView: ImageView = itemView.findViewById(R.id.iv)
 
         fun fill(position: Int) {
-            titleTV.text = list[position].title
+            titleTV.text = "123"
             positionTV.text = "position: $position"
             Glide.with(itemView)
-                .load(list[position].url)
+                .load("https://img0.baidu.com/it/u=1604010673,2427861166&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=889")
                 .into(imageView)
         }
 
