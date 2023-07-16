@@ -19,7 +19,7 @@ class NewsAdapter(private val list: List<NewsItemData>) :
     }
 
     override fun getItemCount(): Int {
-        return 20
+        return 200
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {

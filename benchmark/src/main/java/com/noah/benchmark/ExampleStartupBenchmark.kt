@@ -1,5 +1,6 @@
 package com.noah.benchmark
 
+import androidx.benchmark.macro.CompilationMode
 import androidx.benchmark.macro.FrameTimingMetric
 import androidx.benchmark.macro.MacrobenchmarkScope
 import androidx.benchmark.macro.StartupMode
@@ -30,23 +31,35 @@ class ExampleStartupBenchmark {
     @get:Rule
     val benchmarkRule = MacrobenchmarkRule()
 
+//    @Test
+//    fun startUpCompilationModeNone() = startup(CompilationMode.None())
+//
+//    @Test
+//    fun startUpCompilationModePartial() = startup(CompilationMode.Partial())
+
     @Test
-    fun startup() = benchmarkRule.measureRepeated(
+    fun scrollCompilationModeNone() = scroll(CompilationMode.None())
+
+    @Test
+    fun scrollCompilationModePartial() = scroll(CompilationMode.Partial())
+
+    fun startup(mode: CompilationMode) = benchmarkRule.measureRepeated(
         packageName = "com.noah.baselineprofiledemo",
         metrics = listOf(StartupTimingMetric()),
         iterations = 5,
-        startupMode = StartupMode.COLD
+        startupMode = StartupMode.COLD,
+        compilationMode = mode
     ) {
         pressHome()
         startActivityAndWait()
     }
 
-    @Test
-    fun scroll() = benchmarkRule.measureRepeated(
+    fun scroll(mode: CompilationMode) = benchmarkRule.measureRepeated(
         packageName = "com.noah.baselineprofiledemo",
         metrics = listOf(FrameTimingMetric()),
-        iterations = 5,
-        startupMode = StartupMode.COLD
+        iterations = 10,
+        startupMode = StartupMode.COLD,
+        compilationMode = mode
     ) {
         pressHome()
         startActivityAndWait()
@@ -56,12 +69,8 @@ class ExampleStartupBenchmark {
 }
 
 fun MacrobenchmarkScope.scrollDown() {
-    val button = device.findObject(By.text(""))
     val list = device.findObject(By.desc("HomeNewsFragment.rv"))
-
-    device.waitForIdle()
     list.setGestureMargin(device.displayWidth / 5)
     list.fling(Direction.DOWN)
-
-    device.wait(Until.hasObject(By.text("position: 19")), 5000)
+    list.fling(Direction.DOWN)
 }

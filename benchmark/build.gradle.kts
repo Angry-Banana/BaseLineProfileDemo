@@ -1,5 +1,3 @@
-import com.android.build.gradle.ProguardFiles.ProguardFile
-
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.androidTest)
@@ -24,6 +22,18 @@ android {
         targetSdk = 33
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    testOptions {
+        managedDevices {
+            devices {
+                register("pixel2api31", com.android.build.api.dsl.ManagedVirtualDevice::class) {
+                    device = "Pixel 2"
+                    apiLevel = 31
+                    systemImageSource = "aosp"
+                }
+            }
+        }
     }
 
     buildTypes {
